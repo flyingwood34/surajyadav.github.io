@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Serene Earth Tones (Background: #fdfaf6, Text: #333, Accents: #6b7280, #10b981) -->
+    <!-- Application Structure Plan: The application is structured as a single-page, vertically scrolling website with distinct thematic sections (Home, About, Skills, Projects, Contact). This linear, modular approach provides a clear narrative flow for visitors while allowing quick navigation via a sticky header. This structure was chosen for its simplicity, ease of use, and effectiveness in presenting a professional profile. Each section focuses on a specific aspect of the portfolio, preventing information overload and guiding the user through a comprehensive overview of the individual's capabilities and work. -->
+    <!-- Visualization & Content Choices: 1. Navigation (HTML/CSS/JS): Report Info: Website sections. Goal: Organize/Navigate. Viz/Presentation: Sticky header navigation with links. Interaction: Smooth scroll to sections, active link highlighting on scroll/click. Justification: Standard, intuitive, and highly effective for single-page applications, enhancing user navigation. 2. Skills Display (HTML/CSS): Report Info: Developer's technical and soft skills. Goal: Inform. Viz/Presentation: Categorized lists with subtle styling. Interaction: Static display. Justification: Provides a clear and concise overview of capabilities without requiring complex visualizations. 3. Project Gallery (HTML/CSS/JS): Report Info: Details of key projects (title, description, technologies). Goal: Inform/Showcase. Viz/Presentation: Responsive grid of project cards. Interaction: Clickable cards to reveal more details (e.g., in a simple modal or expanded section). Justification: Visually appealing and allows users to browse projects efficiently, then dive deeper into specific ones of interest, making the portfolio interactive and engaging. 4. Contact Form (HTML/CSS): Report Info: Contact information. Goal: Engage. Viz/Presentation: Standard form fields. Interaction: User input for sending messages. Justification: A direct and universally understood method for professional communication. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfaf6; /* A very light, warm off-white */
+            color: #333; /* Dark gray for primary text */
+            scroll-behavior: smooth;
+        }
+        .section-padding {
+            padding: 4rem 1rem; /* Base padding */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .section-padding {
+                padding: 5rem 2rem;
+            }
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .section-padding {
+                padding: 6rem 4rem;
+            }
+        }
+        .nav-link.active {
+            color: #10b981; /* Tailwind 'emerald-500' */
+            font-weight: 600;
+        }
+        .project-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .close-button:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm fixed w-full z-50 top-0">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-800 hover:text-emerald-600 transition-colors">My Portfolio</a>
+            <div class="space-x-4 md:space-x-8">
+                <a href="#home" class="nav-link text-gray-600 hover:text-emerald-600 transition-colors text-lg">Home</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-emerald-600 transition-colors text-lg">About</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-emerald-600 transition-colors text-lg">Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 hover:text-emerald-600 transition-colors text-lg">Projects</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-emerald-600 transition-colors text-lg">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="section-padding pt-24 min-h-screen flex items-center justify-center text-center bg-gradient-to-br from-fdfaf6 to-emerald-50">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight mb-4">
+                Hi, I'm <span class="text-emerald-600">Suraj Yadav</span>, a Passionate Developer.
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-700 mb-8">
+                Crafting engaging web experiences and solving complex problems with code. Explore my work below!
+            </p>
+            <a href="#projects" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-emerald-700 transition-colors transform hover:scale-105">
+                View My Work
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-gray-700 leading-relaxed">
+                    <p class="mb-4">
+                        I am a dedicated frontend developer with a strong passion for building intuitive and visually appealing web applications. My journey in development began with a fascination for how technology can solve real-world problems and create seamless user experiences.
+                    </p>
+                    <p class="mb-4">
+                        With a keen eye for detail and a commitment to clean, efficient code, I thrive on bringing designs to life and optimizing performance. I enjoy collaborating with teams to transform ideas into robust and scalable solutions.
+                    </p>
+                    <p>
+                        Beyond coding, I'm always eager to learn new technologies and explore innovative approaches to web development. My goal is to create impactful digital products that users love.
+                    </p>
+                </div>
+                <div class="flex justify-center p-4">
+                    <!-- Main container for the dynamic square frame -->
+                    <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md aspect-square bg-white rounded-xl shadow-2xl overflow-hidden flex items-center justify-center border-4 border-blue-500">
+                        <!-- Inner container for the image to maintain aspect ratio and centering -->
+                        <div class="w-full h-full flex items-center justify-center">
+                            <!-- The image element -->
+                            <img
+                                src="https://placehold.co/400x400/3498db/ffffff?text=Your+Profile"
+                                alt="Your Profile Photo"
+                                class="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+                                onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/000000?text=Image+Load+Error';"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-gray-50">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Frontend Development</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>HTML5, CSS3 (Tailwind CSS)</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React.js, Vue.js</li>
+                        <li>Responsive Design</li>
+                        <li>UI/UX Principles</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Backend & Database</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Node.js (Express.js)</li>
+                        <li>Python (Django, Flask)</li>
+                        <li>RESTful APIs</li>
+                        <li>MongoDB, PostgreSQL</li>
+                        <li>Firebase</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Tools & Practices</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>Agile Methodologies</li>
+                        <li>Problem Solving</li>
+                        <li>Communication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">My Projects</h2>
+            <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto">
+                Here are some of the projects I've worked on, showcasing my skills in building interactive and robust web applications. Click on a card to learn more!
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project1">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">E-commerce Platform</h3>
+                    <p class="text-gray-600 mb-4">A full-stack e-commerce solution with user authentication, product catalog, and shopping cart functionality.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">React</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Node.js</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project2">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Task Management App</h3>
+                    <p class="text-gray-600 mb-4">A responsive task management application with drag-and-drop features and real-time updates.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Vue.js</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Firebase</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project3">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Weather Dashboard</h3>
+                    <p class="text-gray-600 mb-4">An interactive weather dashboard fetching real-time data from a public API, displaying forecasts and conditions.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">HTML/CSS</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">API Integration</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Portfolio Site V2</h3>
+                    <p class="text-gray-600 mb-4">An updated version of my personal portfolio, focusing on modern design and improved responsiveness.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">React</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Tailwind CSS</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Figma</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project5">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Recipe Finder App</h3>
+                    <p class="text-gray-600 mb-4">A web application that allows users to search for recipes based on ingredients and dietary preferences.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">JavaScript</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">API Integration</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">CSS Grid</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="project-card bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer" data-project-id="project6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Blog Platform</h3>
+                    <p class="text-gray-600 mb-4">A simple blog platform with admin panel for content management and user commenting features.</p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Python</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Django</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalProjectTitle" class="text-2xl font-bold text-gray-800 mb-4"></h3>
+            <p id="modalProjectDescription" class="text-gray-700 mb-4"></p>
+            <div id="modalProjectTech" class="flex flex-wrap gap-2 text-sm mb-4"></div>
+            <p id="modalProjectDetails" class="text-gray-600 leading-relaxed"></p>
+            <div class="mt-6 flex space-x-4">
+                <a id="modalLiveLink" href="#" target="_blank" class="inline-block bg-emerald-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-emerald-700 transition-colors">
+                    View Live
+                </a>
+                <a id="modalRepoLink" href="#" target="_blank" class="inline-block border border-emerald-600 text-emerald-600 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 transition-colors">
+                    GitHub Repo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-gray-50">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Get In Touch</h2>
+            <p class="text-center text-gray-700 mb-8">
+                Have a project in mind or just want to say hello? Feel free to reach out!
+            </p>
+            <form action="#" method="POST" class="bg-white p-8 rounded-lg shadow-md border border-gray-200">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Your Name">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="your.email@example.com">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                    <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Your message..."></textarea>
+                </div>
+                <div class="flex items-center justify-center">
+                    <button type="submit" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-emerald-700 transition-colors transform hover:scale-105">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p class="text-sm">&copy; 2024 John Doe. All rights reserved.</p>
+            <div class="flex space-x-6 text-2xl">
+                <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors" title="LinkedIn">
+                    &#xf08c; <!-- Unicode for LinkedIn icon (Font Awesome equivalent) -->
+                </a>
+                <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors" title="GitHub">
+                    &#xf09b; <!-- Unicode for GitHub icon (Font Awesome equivalent) -->
+                </a>
+                <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors" title="Email">
+                    &#xf0e0; <!-- Unicode for Envelope icon (Font Awesome equivalent) -->
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        const projectCards = document.querySelectorAll('.project-card');
+        const projectModal = document.getElementById('projectModal');
+        const closeModalButton = document.querySelector('.close-button');
+        const modalProjectTitle = document.getElementById('modalProjectTitle');
+        const modalProjectDescription = document.getElementById('modalProjectDescription');
+        const modalProjectTech = document.getElementById('modalProjectTech');
+        const modalProjectDetails = document.getElementById('modalProjectDetails');
+        const modalLiveLink = document.getElementById('modalLiveLink');
+        const modalRepoLink = document.getElementById('modalRepoLink');
+
+        const projectsData = {
+            project1: {
+                title: 'E-commerce Platform',
+                description: 'A full-stack e-commerce solution with user authentication, product catalog, and shopping cart functionality.',
+                technologies: ['React', 'Node.js', 'MongoDB'],
+                details: 'This project features a robust backend built with Node.js and Express.js, handling user authentication, product management, and order processing. The frontend uses React.js for a dynamic and responsive user interface, including features like product filtering, search, and a secure checkout process. MongoDB serves as the database for storing product information, user data, and orders.',
+                liveLink: '#',
+                repoLink: '#'
+            },
+            project2: {
+                title: 'Task Management App',
+                description: 'A responsive task management application with drag-and-drop features and real-time updates.',
+                technologies: ['Vue.js', 'Firebase', 'Tailwind CSS'],
+                details: 'Developed using Vue.js for a reactive and efficient user interface, this application allows users to create, organize, and manage their tasks. Firebase provides a real-time backend for data storage and authentication, enabling instant updates across devices. Tailwind CSS was used for rapid and consistent styling, ensuring a clean and modern design that is fully responsive across all screen sizes.',
+                liveLink: '#',
+                repoLink: '#'
+            },
+            project3: {
+                title: 'Weather Dashboard',
+                description: 'An interactive weather dashboard fetching real-time data from a public API, displaying forecasts and conditions.',
+                technologies: ['JavaScript', 'HTML/CSS', 'API Integration'],
+                details: 'This project demonstrates strong vanilla JavaScript skills by integrating with a third-party weather API to fetch and display current weather conditions and a multi-day forecast. The interface is built with clean HTML and styled with custom CSS, focusing on user-friendliness and clear presentation of meteorological data. It includes features like city search and dynamic background changes based on weather conditions.',
+                liveLink: '#',
+                repoLink: '#'
+            },
+            project4: {
+                title: 'Portfolio Site V2',
+                description: 'An updated version of my personal portfolio, focusing on modern design and improved responsiveness.',
+                technologies: ['React', 'Tailwind CSS', 'Figma'],
+                details: 'This is the second iteration of my personal portfolio website, built with React for modularity and efficient component management. Tailwind CSS was extensively used to create a highly responsive and aesthetically pleasing design. The design process involved Figma for prototyping and ensuring a polished user experience, reflecting my growth in UI/UX principles and modern web development practices.',
+                liveLink: '#',
+                repoLink: '#'
+            },
+            project5: {
+                title: 'Recipe Finder App',
+                description: 'A web application that allows users to search for recipes based on ingredients and dietary preferences.',
+                technologies: ['JavaScript', 'API Integration', 'CSS Grid'],
+                details: 'This application leverages a public recipe API to provide users with a vast database of recipes. Users can input ingredients they have on hand or specify dietary restrictions to find suitable recipes. The frontend is built with vanilla JavaScript, using modern CSS Grid for a flexible and responsive layout that adapts well to various screen sizes. Each recipe displays detailed information, including ingredients, instructions, and nutritional facts.',
+                liveLink: '#',
+                repoLink: '#'
+            },
+            project6: {
+                title: 'Blog Platform',
+                description: 'A simple blog platform with admin panel for content management and user commenting features.',
+                technologies: ['Python', 'Django', 'PostgreSQL'],
+                details: 'Developed using Python\'s Django framework, this project is a robust blogging platform. It includes features for authenticated users to create, edit, and publish blog posts, as well as an admin interface for content moderation. PostgreSQL serves as the relational database, ensuring data integrity and efficient querying. User commenting functionality allows for community engagement on blog posts.',
+                liveLink: '#',
+                repoLink: '#'
+            }
+        };
+
+        function setActiveNavLink() {
+            let currentActive = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Adjust for fixed header
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentActive = section.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(`#${currentActive}`)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70, // Adjust for fixed header height
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', setActiveNavLink);
+        window.addEventListener('load', setActiveNavLink); // Set initial active link on load
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const projectId = this.dataset.projectId;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    modalProjectTitle.textContent = project.title;
+                    modalProjectDescription.textContent = project.description;
+                    modalProjectDetails.textContent = project.details;
+                    modalLiveLink.href = project.liveLink;
+                    modalRepoLink.href = project.repoLink;
+
+                    modalProjectTech.innerHTML = '';
+                    project.technologies.forEach(tech => {
+                        const span = document.createElement('span');
+                        span.className = 'bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full';
+                        span.textContent = tech;
+                        modalProjectTech.appendChild(span);
+                    });
+
+                    projectModal.style.display = 'flex';
+                }
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+        });
+
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
